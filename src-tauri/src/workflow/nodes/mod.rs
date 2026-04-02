@@ -1,0 +1,60 @@
+pub mod ai_utils;
+pub mod ai_chat;
+pub mod clipboard_read;
+pub mod clipboard_write;
+pub mod condition;
+pub mod data_process;
+pub mod delay;
+pub mod file_copy;
+pub mod file_move;
+pub mod file_read;
+pub mod file_write;
+pub mod http_request;
+pub mod image_preview;
+pub mod json_process;
+pub mod loop_node;
+pub mod notification;
+pub mod screenshot_full;
+pub mod screenshot_region;
+pub mod shell;
+pub mod sub_workflow;
+pub mod text_process;
+pub mod regex_extract;
+pub mod email_send;
+pub mod code_node;
+pub mod applescript;
+pub mod open_app;
+pub mod keyboard_type;
+pub mod user_input;
+pub mod file_watch;
+pub mod comment;
+pub mod variable_set;
+pub mod variable_get;
+pub mod database;
+pub mod sql_query;
+pub mod merge;
+pub mod batch_process;
+pub mod image_generate;
+pub mod tts;
+pub mod stt;
+pub mod intent_recognition;
+pub mod knowledge_write;
+pub mod knowledge_search;
+pub mod webhook_trigger;
+pub mod result_dialog;
+pub mod agent;
+pub mod list_operator;
+pub mod template_render;
+pub mod document_extractor;
+pub mod parameter_extractor;
+pub mod human_review;
+pub mod parallel;
+
+use serde_json::Value;
+use tauri::AppHandle;
+
+#[async_trait::async_trait]
+pub trait INode: Send + Sync {
+    fn node_type(&self) -> &str;
+    async fn execute(&self, input: Value, config: Value, app: &AppHandle) -> Result<Value, String>;
+}
